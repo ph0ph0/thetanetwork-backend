@@ -1,4 +1,4 @@
-version: '1'
+version: '3'
 services:
   server:
     build: ./server
@@ -9,7 +9,7 @@ services:
       - som-model
 
   queue:
-    image: queue:3-management
+    image: rabbitmq:3-management
     ports:
       - "5672:5672"
       - "15672:15672"
