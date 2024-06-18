@@ -1,0 +1,26 @@
+version: '1'
+services:
+  server:
+    build: ./server
+    ports:
+      - "4000:4000"
+    depends_on:
+      - queue
+      - som-model
+
+  queue:
+    image: queue:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  som-model:
+    build: ./som-model
+    depends_on:
+      - queue
+
+  valuation-model:
+    build: ./valuation-model
+    depends_on:
+      - queue
+      - som-model
