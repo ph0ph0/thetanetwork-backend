@@ -1,0 +1,21 @@
+"""
+Endpoints
+- endpoint for submitting image data?
+- endpoint for subscribing to valuation 
+
+Input
+- TaskInput
+    - id
+    - desc
+    - cid?
+    - wallet address
+
+Type (outputs)
+- Task
+    - id
+    - desc
+    - cid?
+    - wallet address
+    - status
+    - valuation
+"""
