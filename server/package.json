@@ -4,8 +4,39 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/client": "^3.10.5",
+    "apollo-server": "^3.13.0",
+    "express": "^4.19.2",
+    "graphql": "^15.8.0",
+    "graphql-subscriptions": "^2.0.0",
+    "subscriptions-transport-ws": "^0.11.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/register": "^7.14.5",
+    "apollo-server-testing": "^2.25.3",
+    "babel-jest": "^27.0.6",
+    "graphql-tag": "^2.12.6",
+    "graphql-ws": "^5.16.0",
+    "jest": "^29.7.0",
+    "ws": "^8.17.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "node",
+      "gql"
+    ]
+  }
 }
