@@ -1,13 +1,19 @@
 """
 Endpoints
-- endpoint for submitting image data?
-- endpoint for subscribing to valuation 
+Subscription: 
+- taskCreated: 
+    - Frontend subscribes to receive Task object update
+
+Mutation:
+- createTask:
+    - Used for submitting task request
+    - Returns Task object
 
 Input
-- TaskInput
+- CreateTask
     - id
     - desc
-    - cid?
+    - folderPath
     - wallet address
 
 Type (outputs)
@@ -19,3 +25,27 @@ Type (outputs)
     - status
     - valuation
 """
+
+type Subscription {
+  taskCreated: Task
+}
+
+type Mutation {
+  createTask(input: CreateTaskInput!): Task
+}
+
+input CreateTaskInput {
+  id: ID!
+  desc: String!
+  folderPath: String!
+  walletAddress: String!
+}
+
+type Task {
+  id: ID!
+  desc: String!
+  cid: String
+  walletAddress: String!
+  status: String!
+  valuation: Int
+}
