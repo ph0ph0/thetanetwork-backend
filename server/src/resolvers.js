@@ -11,6 +11,7 @@ const resolvers = {
   Mutation: {
     createTask: (_, { input }) => {
       const task = { ...input, status: "Pending", valuation: 0 };
+      console.log(`Task created: ${JSON.stringify(task)}`);
       pubsub.publish(`TASK_CREATED_${task.folderPath}`, { taskUpdated: task });
       return task;
     },

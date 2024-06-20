@@ -4,8 +4,14 @@ const { createServer } = require("http");
 const { execute, subscribe } = require("graphql");
 const { SubscriptionServer } = require("subscriptions-transport-ws");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
+const gql = require("graphql-tag");
 
-const typeDefs = require("./schema");
+const typeDefs = gql`
+  ${require("fs").readFileSync(
+    require("path").join(__dirname, "schema.gql"),
+    "utf8"
+  )}
+`;
 const resolvers = require("./resolvers");
 const pubsub = require("./pubsub"); // Use the shared pubsub instance
 const processValuationUpdates = require("./processValuationUpdates");
