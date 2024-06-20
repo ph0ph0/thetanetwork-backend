@@ -1,7 +1,7 @@
 """
 Endpoints
 Subscription:
-- taskCreated:
+- taskUpdated:
     - Frontend subscribes to receive Task object update
 
 Mutation:
@@ -30,7 +30,7 @@ type Query {
 }
 
 type Subscription {
-  taskCreated(folderPath: String!): Task
+  taskUpdated(folderPath: String!): Task
 }
 
 type Mutation {
@@ -52,4 +52,5 @@ type Task {
   walletAddress: String!
   status: String!
   valuation: Int
+  message: String
 }

@@ -73,8 +73,8 @@ const CREATE_TASK = gql`
 `;
 
 const TASK_CREATED = gql`
-  subscription TaskCreated($folderPath: String!) {
-    taskCreated(folderPath: $folderPath) {
+  subscription TaskUpdated($folderPath: String!) {
+    taskUpdated(folderPath: $folderPath) {
       id
       desc
       folderPath
@@ -135,7 +135,7 @@ test("publishes task creation events to the correct subscription channel", (done
       next(response) {
         console.log("Subscription Response:", response.data);
         try {
-          expect(response.data.taskCreated).toEqual({
+          expect(response.data.taskUpdated).toEqual({
             __typename: "Task",
             id: "1",
             desc: "Test Task",

@@ -4,9 +4,11 @@ const { createServer } = require("http");
 const { execute, subscribe } = require("graphql");
 const { SubscriptionServer } = require("subscriptions-transport-ws");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
+
 const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
 const pubsub = require("./pubsub"); // Use the shared pubsub instance
+const processValuationUpdates = require("./processValuationUpdates");
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
@@ -56,4 +58,6 @@ let subscriptionServer;
       `Subscriptions ready at ws://localhost:4000${server.graphqlPath}`
     );
   });
+
+  processValuationUpdates(); // Start listening to the ValM queue
 })();
