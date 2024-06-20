@@ -43,7 +43,13 @@ describe("processValuationUpdates", () => {
     consumeMock(testMessage);
 
     expect(pubsub.publish).toHaveBeenCalledWith("TASK_UPDATED_/test/path", {
-      taskUpdated: { valuation: 42, status: "Completed" },
+      taskUpdated: {
+        valuation: 42,
+        status: "Completed",
+        taskId: "1",
+        walletAddress: "0x123",
+        folderPath: "/test/path",
+      },
     });
     expect(channelMock.ack).toHaveBeenCalledWith(testMessage);
   });

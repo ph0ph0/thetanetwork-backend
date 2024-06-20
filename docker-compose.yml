@@ -1,26 +1,45 @@
-version: '3'
-services:
-  server:
-    build: ./server
-    ports:
-      - "4000:4000"
-    depends_on:
-      - queue
-      - som-model
+version: '3.8'
 
-  queue:
+services:
+  rabbitmq:
     image: rabbitmq:3-management
     ports:
       - "5672:5672"
       - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   som-model:
-    build: ./som-model
+    build:
+      context: ./som-model
     depends_on:
-      - queue
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      RABBITMQ_URL: amqp://user:password@rabbitmq
 
   valuation-model:
-    build: ./valuation-model
+    build:
+      context: ./valuation-model
     depends_on:
-      - queue
-      - som-model
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      RABBITMQ_URL: amqp://user:password@rabbitmq
+
+  server:
+    build:
+      context: ./server
+    ports:
+      - "4000:4000"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      RABBITMQ_URL: amqp://user:password@rabbitmq

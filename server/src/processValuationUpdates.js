@@ -2,12 +2,15 @@ const amqp = require("amqplib");
 const pubsub = require("./pubsub");
 
 async function processValuationUpdates() {
+  let rabbitmqUrl;
   if (process.env.SKIP_RABBITMQ === "true") {
     console.log("Skipping RabbitMQ connection.");
     return;
+  } else {
+    rabbitmqUrl = process.env.RABBITMQ_URL || "amqp://rabbitmq";
   }
 
-  const connection = await amqp.connect("amqp://localhost");
+  const connection = await amqp.connect(rabbitmqUrl);
   const channel = await connection.createChannel();
   await channel.assertQueue("update_task_queue", { durable: false });
 
@@ -17,7 +20,7 @@ async function processValuationUpdates() {
         msg.content.toString()
       );
 
-      let task = {};
+      let task = { taskId, walletAddress, folderPath };
       task.valuation = valuation;
       task.status = "Completed";
 
