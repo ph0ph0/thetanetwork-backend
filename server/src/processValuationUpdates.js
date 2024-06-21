@@ -16,6 +16,7 @@ async function processValuationUpdates() {
 
   channel.consume("update_task_queue", (msg) => {
     if (msg !== null) {
+      console.log("Received message from queue");
       const { valuation, taskId, walletAddress, folderPath } = JSON.parse(
         msg.content.toString()
       );
@@ -24,6 +25,7 @@ async function processValuationUpdates() {
       task.valuation = valuation;
       task.status = "Completed";
 
+      console.log(`Task updated: ${JSON.stringify(task)}`);
       pubsub.publish(`TASK_UPDATED_${folderPath}`, { taskUpdated: task });
 
       channel.ack(msg);

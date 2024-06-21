@@ -20,6 +20,7 @@ const resolvers = {
       const connection = await amqp.connect(rabbitmqUrl);
       const channel = await connection.createChannel();
       await channel.assertQueue("som_queue", { durable: false });
+      console.log("sending task to queue");
       channel.sendToQueue("som_queue", Buffer.from(JSON.stringify(task)));
       console.log(`Task sent to som_queue: ${JSON.stringify(task)}`);
 
