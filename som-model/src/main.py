@@ -1,23 +1,25 @@
+import logging
 import pika
 import json
 import os
 import time
 
+logging.basicConfig(level=logging.INFO)
+
 def callback(ch, method, properties, body):
+    logging.info(f'Received data: {body}')
     data = json.loads(body)
     processed_data = process_data_with_model(data)
     ch.basic_ack(delivery_tag=method.delivery_tag)
-    print(f'Processed data: {processed_data}')
+    logging.info(f'Processed data: {processed_data}')
     
     # Add processed data to val_queue
     add_to_valuation_queue(processed_data)
-    print(f'Added data to val_queue: {processed_data}')
+    logging.info(f'Added data to val_queue: {processed_data}')
 
 def process_data_with_model(data):
-    # Simulate processing the data
+    # Simulate val mod processing the data
     time.sleep(1)
-    # Here you would include the actual SoM model processing logic
-    # For now, let's assume processed data is the same as input data
     return data
 
 def add_to_valuation_queue(data):
@@ -32,13 +34,16 @@ def add_to_valuation_queue(data):
     connection.close()
 
 def main():
+    logging.info('Starting som model service')
     rabbitmq_url = os.environ.get('RABBITMQ_URL', 'amqp://localhost')
+    logging.info(f'Connecting to RabbitMQ at {rabbitmq_url}')
     connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
     channel = connection.channel()
     channel.queue_declare(queue='som_queue', durable=False)
+    logging.info('som model connected to RabbitMQ')
 
     channel.basic_consume(queue='som_queue', on_message_callback=callback)
-    print('Waiting for messages. To exit press CTRL+C')
+    logging.info('Waiting for messages. To exit press CTRL+C')
     channel.start_consuming()
 
 if __name__ == "__main__":
