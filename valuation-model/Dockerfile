@@ -13,6 +13,8 @@ RUN apt-get update && apt-get install -y git
 # Copy the current directory contents into the container at /usr/src/app
 COPY . .
 
+ENV RABBITMQ_URL=amqp://guest:guest@44.209.101.218
+
 # Install Python dependencies
 RUN pip install --no-cache-dir ftfy regex tqdm
 
