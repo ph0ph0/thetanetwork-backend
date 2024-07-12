@@ -58,10 +58,10 @@ let subscriptionServer;
     }
   );
 
-  httpServer.listen({ port: 4000 }, () => {
-    console.log(`Server ready at http://localhost:4000${server.graphqlPath}`);
+  httpServer.listen({ port: 4000, host: "0.0.0.0" }, () => {
+    console.log(`Server ready at http://0.0.0.0:4000${server.graphqlPath}`);
     console.log(
-      `Subscriptions ready at ws://localhost:4000${server.graphqlPath}`
+      `Subscriptions ready at ws://0.0.0.0:4000${server.graphqlPath}`
     );
   });
 
