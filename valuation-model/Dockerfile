@@ -15,8 +15,11 @@ COPY . .
 
 ENV RABBITMQ_URL=amqp://guest:guest@44.209.101.218
 
+# Update pip
+RUN pip install --upgrade pip
+
 # Install Python dependencies
-RUN pip install --no-cache-dir ftfy regex tqdm
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entrypoint script
 COPY entrypoint.sh /usr/src/app/entrypoint.sh

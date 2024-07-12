@@ -17,11 +17,10 @@ async function processValuationUpdates() {
   channel.consume("update_task_queue", (msg) => {
     if (msg !== null) {
       console.log("Received message from queue");
-      const { valuation, taskId, walletAddress, folderPath } = JSON.parse(
-        msg.content.toString()
-      );
+      const { valuation, walletAddress, folderPath, id, desc, status } =
+        JSON.parse(msg.content.toString());
 
-      let task = { taskId, walletAddress, folderPath };
+      let task = { valuation, walletAddress, folderPath, id, desc, status };
       task.valuation = valuation;
       task.status = "Completed";
 

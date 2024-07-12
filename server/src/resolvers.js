@@ -19,10 +19,10 @@ const resolvers = {
       // Publish task to RabbitMQ queue
       const connection = await amqp.connect(rabbitmqUrl);
       const channel = await connection.createChannel();
-      await channel.assertQueue("som_queue", { durable: false });
+      await channel.assertQueue("val_queue", { durable: false });
       console.log("sending task to queue");
-      channel.sendToQueue("som_queue", Buffer.from(JSON.stringify(task)));
-      console.log(`Task sent to som_queue: ${JSON.stringify(task)}`);
+      channel.sendToQueue("val_queue", Buffer.from(JSON.stringify(task)));
+      console.log(`Task sent to val_queue: ${JSON.stringify(task)}`);
 
       // Optionally close the connection and channel
       setTimeout(() => {
