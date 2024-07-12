@@ -232,7 +232,6 @@ persistent==5.0
 pexpect @ file:///opt/concourse/worker/volumes/live/8701bb20-ad87-46c7-5108-30c178cf97e5/volume/pexpect_1594383388344/work
 pickleshare @ file:///opt/concourse/worker/volumes/live/93ec39d8-05bb-4f84-7efc-98735bc39b70/volume/pickleshare_1594384101884/work
 pika==1.3.2
-Pillow==9.5.0
 pipenv==2020.11.15
 pipx==1.0.0
 pkginfo==1.6.1
@@ -345,13 +344,11 @@ terminado==0.9.1
 testpath==0.4.4
 threadpoolctl @ file:///tmp/tmp9twdgx9k/threadpoolctl-2.1.0-py3-none-any.whl
 tifffile==2020.10.1
-tiktoken==0.4.0
 toml==0.10.2
 tomli==2.0.1
 tomli-w==1.0.0
 toolz @ file:///tmp/build/80754af9/toolz_1601054250827/work
 torch==1.7.1
-torchvision==0.8.2
 tornado==6.3.2
 tqdm==4.65.0
 traitlets==5.9.0
@@ -391,3 +388,13 @@ zict==2.0.0
 zipp @ file:///tmp/build/80754af9/zipp_1604001098328/work
 zope.event==4.5.0
 zope.interface @ file:///opt/concourse/worker/volumes/live/de428e3b-00ba-4161-442e-b9e5d25e4219/volume/zope.interface_1602002489816/work
+transformers==4.32.0
+accelerate
+tiktoken
+einops
+transformers_stream_generator==0.0.4
+scipy
+torchvision
+pillow
+tensorboard
+matplotlib

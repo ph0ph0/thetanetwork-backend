@@ -1,0 +1,9 @@
+"""
+Endpoints
+Query:
+- test:
+    - Used to test if Theta Network deployment has worked. Should return success
+"""
+type Query {
+  test: Boolean
+}
