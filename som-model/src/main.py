@@ -25,7 +25,7 @@ def process_data_with_model(data):
 def add_to_server_queue(data):
     rabbitmq_url = os.environ.get('RABBITMQ_URL', 'amqp://localhost')
     # TODO: Delete hardcoded env var
-    rabbitmq_url = 'amqp://guest:guest@44.209.101.218'
+    rabbitmq_url = 'amqp://guest:guest@34.231.140.237'
     connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
     channel = connection.channel()
     channel.queue_declare(queue='server_queue', durable=False)

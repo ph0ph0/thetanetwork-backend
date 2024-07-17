@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y git
 # Copy the current directory contents into the container at /usr/src/app
 COPY . .
 
-ENV RABBITMQ_URL=amqp://guest:guest@44.209.101.218
+ENV RABBITMQ_URL=amqp://guest:guest@34.231.140.237
 
 # Update pip
 RUN pip install --upgrade pip

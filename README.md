@@ -27,3 +27,27 @@ Run remote docker image
 ```
 docker run -d -p <port>:<port> <username>/<your-repo>:<your-tag>
 ```
+
+# RabbitMQ
+
+If queue requires multiple requests to complete a full cycle, restart the server.
+
+## Installation
+```
+sudo apt update
+sudo apt install rabbitmq-server -y
+```
+
+## Run
+
+```
+sudo systemctl start rabbitmq-server
+sudo rabbitmq-plugins enable rabbitmq_management
+sudo systemctl enable rabbitmq-server
+```
+
+## Status
+
+```
+sudo systemctl status rabbitmq-server
+```

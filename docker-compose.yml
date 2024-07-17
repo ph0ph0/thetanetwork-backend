@@ -6,13 +6,13 @@ services:
     build:
       context: ./som-model
     environment:
-      RABBITMQ_URL: amqp://guest:guest@44.209.101.218
+      RABBITMQ_URL: amqp://guest:guest@34.231.140.237
 
   valuation-model:
     build:
       context: ./valuation-model
     environment:
-      RABBITMQ_URL: amqp://guest:guest@44.209.101.218
+      RABBITMQ_URL: amqp://guest:guest@34.231.140.237
 
   server:
     build:
@@ -20,4 +20,4 @@ services:
     ports:
       - "4000:4000"
     environment:
-      RABBITMQ_URL: amqp://guest:guest@44.209.101.218
+      RABBITMQ_URL: amqp://guest:guest@34.231.140.237

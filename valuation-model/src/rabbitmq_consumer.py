@@ -19,7 +19,7 @@ class ValModConsumer:
         self._consuming = False
 
         # TODO: Delete hardcoded env var
-        self._url = 'amqp://guest:guest@44.209.101.218'
+        self._url = 'amqp://guest:guest@34.231.140.237'
 
     async def connect(self):
         logger.info('Connecting to %s', self._url)
