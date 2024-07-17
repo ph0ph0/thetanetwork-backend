@@ -1,1 +1,5 @@
-pika
+pika==1.3.1
+aiohttp==3.8.4
+graphql-core==3.2.3
+graphene==3.2.1
+aio-pika==9.0.5
