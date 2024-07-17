@@ -13,6 +13,11 @@ Run individual container
 docker run -p <port>:<port> <name>
 ```
 
+Build before pushing to docker
+```
+docker build -t <username>/<name>:latest .
+```
+
 Push build to docker
 ```
 docker push <username>/<your-repo>:<your-tag>
