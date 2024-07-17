@@ -51,3 +51,20 @@ sudo systemctl enable rabbitmq-server
 ```
 sudo systemctl status rabbitmq-server
 ```
+
+## Setup UI
+
+```
+sudo nano /etc/rabbitmq/rabbitmq.conf
+```
+
+Add to file and save:
+```
+loopback_users = none
+```
+Restart rMQ in ubuntu user folder:
+```
+sudo systemctl restart rabbitmq-server
+```
+Go to IP/15672/ (eg http://34.231.140.237:15672/#/)
+Login with guest guest
