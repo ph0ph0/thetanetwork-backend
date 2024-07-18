@@ -15,8 +15,8 @@ ENV RABBITMQ_URL=amqp://guest:guest@34.231.140.237
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
+# Make port 8080 available to the world outside this container
+EXPOSE 8080
 
 # Run task_processor.py when the container launches
 CMD ["python", "src/main.py"]

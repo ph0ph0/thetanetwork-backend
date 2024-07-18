@@ -62,11 +62,11 @@ async def start_services():
     app.router.add_get('/graphiql', graphiql_handler)
     runner = web.AppRunner(app)
     await runner.setup()
-    site = web.TCPSite(runner, '0.0.0.0', 80)
+    site = web.TCPSite(runner, '0.0.0.0', 8080)
     await site.start()
 
-    print("GraphQL server started at http://0.0.0.0:80/graphql")
-    print("GraphiQL interface available at http://0.0.0.0:80/graphiql")
+    print("GraphQL server started at http://0.0.0.0:8080/graphql")
+    print("GraphiQL interface available at http://0.0.0.0:8080/graphiql")
     print("RabbitMQ consumer started")
 
     # Keep the services running
