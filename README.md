@@ -60,7 +60,9 @@ sudo nano /etc/rabbitmq/rabbitmq.conf
 
 Add to file and save:
 ```
-loopback_users = none
+loopback_users.guest = false
+listeners.tcp.default = 5672
+management.listener.port = 15672
 ```
 Restart rMQ in ubuntu user folder:
 ```
@@ -68,3 +70,28 @@ sudo systemctl restart rabbitmq-server
 ```
 Go to IP/15672/ (eg http://34.231.140.237:15672/#/)
 Login with guest guest
+
+# Stop and remove rMQ
+```
+sudo systemctl stop rabbitmq-server -y
+sudo apt-get remove --purge rabbitmq-server -y
+sudo apt-get autoremove -y
+sudo rm -rf /var/lib/rabbitmq/
+sudo rm -rf /etc/rabbitmq/
+sudo rm -rf /var/lib/rabbitmq/mnesia
+```
+Reinstall and setup after removing
+
+Complete stop and restart steps before setting config:
+```
+sudo systemctl stop rabbitmq-server -y
+sudo apt-get remove --purge rabbitmq-server -y
+sudo apt-get autoremove -y
+sudo rm -rf /var/lib/rabbitmq/
+sudo rm -rf /etc/rabbitmq/
+sudo rm -rf /var/lib/rabbitmq/mnesia
+sudo apt update
+sudo apt install rabbitmq-server -y
+sudo systemctl start rabbitmq-server
+sudo rabbitmq-plugins enable rabbitmq_management
+sudo systemctl enable rabbitmq-server
