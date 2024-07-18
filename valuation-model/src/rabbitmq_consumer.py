@@ -73,18 +73,18 @@ class ValModConsumer:
         data = json.loads(body)
         processed_data = await self.process_data_with_model(data)
         logger.info('Processed data: %s', processed_data)
-        await self.add_to_task_queue(processed_data)
-        logger.info('Added data to server_queue: %s', processed_data)
+        await self.add_to_update_task_queue(processed_data)
+        logger.info('Added data to update_task_queue: %s', processed_data)
 
     async def process_data_with_model(self, data):
         await asyncio.sleep(1)  # Simulating processing time
         return data
 
-    async def add_to_task_queue(self, data):
-        await self._channel.declare_queue('server_queue', durable=False)
+    async def add_to_update_task_queue(self, data):
+        await self._channel.declare_queue('update_task_queue', durable=False)
         await self._channel.default_exchange.publish(
             aio_pika.Message(body=json.dumps(data).encode()),
-            routing_key='server_queue'
+            routing_key='update_task_queue'
         )
 
     async def stop_consuming(self):

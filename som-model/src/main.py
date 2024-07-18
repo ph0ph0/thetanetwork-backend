@@ -13,25 +13,25 @@ def callback(ch, method, properties, body):
     ch.basic_ack(delivery_tag=method.delivery_tag)
     logging.info(f'Processed data: {processed_data}')
     
-    # Add processed data to server_queue
-    add_to_server_queue(processed_data)
-    logging.info(f'Added data to server_queue: {processed_data}')
+    # Add processed data to update_task_queue
+    add_to_update_task_queue(processed_data)
+    logging.info(f'Added data to update_task_queue: {processed_data}')
 
 def process_data_with_model(data):
     # Simulate val mod processing the data
     time.sleep(1)
     return data
 
-def add_to_server_queue(data):
+def add_to_update_task_queue(data):
     rabbitmq_url = os.environ.get('RABBITMQ_URL', 'amqp://localhost')
     # TODO: Delete hardcoded env var
     rabbitmq_url = 'amqp://guest:guest@34.231.140.237'
     connection = pika.BlockingConnection(pika.URLParameters(rabbitmq_url))
     channel = connection.channel()
-    channel.queue_declare(queue='server_queue', durable=False)
+    channel.queue_declare(queue='update_task_queue', durable=False)
     
     channel.basic_publish(exchange='',
-                          routing_key='server_queue',
+                          routing_key='update_task_queue',
                           body=json.dumps(data))
     connection.close()
 

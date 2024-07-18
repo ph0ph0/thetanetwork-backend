@@ -8,7 +8,7 @@ async function initRabbitMQ() {
     const rabbitmqUrl = process.env.RABBITMQ_URL || "amqp://rabbitmq";
     connection = await amqp.connect(rabbitmqUrl);
     channel = await connection.createChannel();
-    await channel.assertQueue("server_queue", { durable: false });
+    await channel.assertQueue("update_task_queue", { durable: false });
 
     console.log("Connected to RabbitMQ, waiting for messages");
 
@@ -32,7 +32,7 @@ async function initRabbitMQ() {
       setTimeout(initRabbitMQ, 5000);
     });
 
-    channel.consume("server_queue", (msg) => {
+    channel.consume("update_task_queue", (msg) => {
       if (msg !== null) {
         console.log("Received message from server queue");
         const { valuation, walletAddress, folderPath, id, desc, status } =
