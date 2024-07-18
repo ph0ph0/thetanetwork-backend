@@ -16,5 +16,8 @@ fi
 # Install CLIP
 # pip install git+https://github.com/openai/CLIP.git
 
+
 # Run the application
-exec python src/main.py
+echo "Starting Node.js application"
+exec node /usr/src/app/src/index.js
+
