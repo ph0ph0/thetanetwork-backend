@@ -31,7 +31,7 @@ def generate_signed_message(recipient: str, valuation: int) -> dict:
         "signer": account.address
     }
     
-    return result[signature]
+    return result["signature"]
 
 if __name__ == "__main__":
     example_usage()

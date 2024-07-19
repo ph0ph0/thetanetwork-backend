@@ -68,6 +68,7 @@ const server = new ApolloServer({
   server.applyMiddleware({ app });
 
   httpServer.listen({ port: 4000, host: "0.0.0.0" }, () => {
+    console.log("Started latest server fresh");
     console.log(`Server ready at http://0.0.0.0:4000${server.graphqlPath}`);
     console.log(
       `Subscriptions ready at ws://0.0.0.0:4000${server.graphqlPath}`

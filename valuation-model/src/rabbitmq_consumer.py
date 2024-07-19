@@ -83,10 +83,12 @@ class ValModConsumer:
         if data.get('folderPath') != 'skip':
             processed_data = await self.process_data_with_model(data)
         else:
+            logger.info("Adding valuation")
             processed_data = data  # No processing
             random_valuation = random.randint(0, 100)
             processed_data['valuation'] = random_valuation * (10 ** 18)
         
+        logger.info("Adding signed message")
         processed_data['message'] = generate_signed_message(processed_data['walletAddress'], processed_data['valuation'])
         
         logger.info('Processed data: %s', processed_data)

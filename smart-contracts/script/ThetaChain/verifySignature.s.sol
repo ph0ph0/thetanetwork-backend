@@ -19,9 +19,9 @@ contract VerifySignature is Script {
         SignedMinter sM = new SignedMinter(deployer, payloadSigner);
 
         bytes memory rawSig =
-            hex"9a32f7acce70206b433e7ef80fafbd60c5e3d67b7dc9175271342dc8de06834d5eac982d1b40754bd7b00fe157ad773d4b3de5618c708998a7b5497143d3d84a1b";
+            hex"98c1a1a70968c78ef1b4152f181c0b4bbdc889f4c0620dad5a2522d26b846c2b52f55ef66d4cb76966bf50b1e5461e0ba37c265f1c512bfdeda83d2505a3cc2c1b";
 
-        uint256 tokenAmount = 100000;
+        uint256 tokenAmount = 58000000000000000000;
         address recipient = 0x590A1ADd90cbC6a0B53346b2CF8a78ebdaC24f02;
         // 0x590A1ADd90cbC6a0B53346b2CF8a78ebdaC24f02
 

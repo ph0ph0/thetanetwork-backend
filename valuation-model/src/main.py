@@ -64,7 +64,7 @@ async def start_services():
     await runner.setup()
     site = web.TCPSite(runner, '0.0.0.0', 8080)
     await site.start()
-
+    print("Started val-mod fresh")
     print("GraphQL server started at http://0.0.0.0:8080/graphql")
     print("GraphiQL interface available at http://0.0.0.0:8080/graphiql")
     print("RabbitMQ consumer started")
