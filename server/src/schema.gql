@@ -51,6 +51,6 @@ type Task {
   folderPath: String!
   walletAddress: String!
   status: String!
-  valuation: Int
+  valuation: String
   message: String
 }

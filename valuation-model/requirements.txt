@@ -3,3 +3,15 @@ aiohttp==3.8.4
 graphql-core==3.2.3
 graphene==3.2.1
 aio-pika==9.0.5
+# torch==2.3.1 
+# torchvision==0.18.1
+# Pillow
+# tiktoken
+# accelerate
+# transformers
+# bitsandbytes
+# einops 
+# transformers_stream_generator
+web3
+eth_account
+matplotlib

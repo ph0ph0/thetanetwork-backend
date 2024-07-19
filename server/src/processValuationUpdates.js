@@ -34,12 +34,11 @@ async function initRabbitMQ() {
 
     channel.consume("update_task_queue", (msg) => {
       if (msg !== null) {
-        console.log("Received message from server queue");
-        const { valuation, walletAddress, folderPath, id, desc, status } =
+        console.log("Received message from update task queue");
+        const { valuation, walletAddress, folderPath, id, desc, status, message } =
           JSON.parse(msg.content.toString());
 
-        let task = { valuation, walletAddress, folderPath, id, desc, status };
-        task.valuation = valuation;
+        let task = { valuation, walletAddress, folderPath, id, desc, status, message };
         task.status = "Completed";
 
         console.log(`Finished, task updated: ${JSON.stringify(task)}`);

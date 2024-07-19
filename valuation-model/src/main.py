@@ -53,7 +53,7 @@ async def graphiql_handler(request):
 
 async def start_services():
     # Start the RabbitMQ consumer
-    consumer = ValModConsumer()
+    consumer = ValModConsumer(False)
     consumer_task = asyncio.create_task(consumer.run_async())
 
     # Start the GraphQL server

@@ -3,12 +3,15 @@ import json
 import os
 import asyncio
 import logging
+import random
+
+from message_signer import generate_signed_message
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class ValModConsumer:
-    def __init__(self):
+    def __init__(self, initModel=False):
         self.should_reconnect = False
         self.was_consuming = False
 
@@ -20,6 +23,13 @@ class ValModConsumer:
 
         # TODO: Delete hardcoded env var
         self._url = 'amqp://guest:guest@34.231.140.237'
+
+        # Initialize the model
+        if initModel:
+            from model.model_Qwen import ValuationModel  
+            self.valuation_model = ValuationModel()
+        else:
+            self.valuation_model = None
 
     async def connect(self):
         logger.info('Connecting to %s', self._url)
@@ -65,19 +75,30 @@ class ValModConsumer:
 
     async def on_message(self, message):
         async with message.process():
-            logger.info('Received message # %s: %s',
-                        message.delivery_tag, message.body)
+            logger.info('Received message # %s: %s', message.delivery_tag, message.body)
             await self.process_message(message.body)
 
     async def process_message(self, body):
         data = json.loads(body)
-        processed_data = await self.process_data_with_model(data)
+        if data.get('folderPath') != 'skip':
+            processed_data = await self.process_data_with_model(data)
+        else:
+            processed_data = data  # No processing
+            random_valuation = random.randint(0, 100)
+            processed_data['valuation'] = random_valuation * (10 ** 18)
+        
+        processed_data['message'] = generate_signed_message(processed_data['walletAddress'], processed_data['valuation'])
+        
         logger.info('Processed data: %s', processed_data)
         await self.add_to_update_task_queue(processed_data)
         logger.info('Added data to update_task_queue: %s', processed_data)
 
     async def process_data_with_model(self, data):
-        await asyncio.sleep(1)  # Simulating processing time
+        # Simulate the time for processing and then call the model
+        await asyncio.sleep(1)
+        self.valuation_model.load_images()  # Assuming this method sets up images
+        response = self.valuation_model.query_model()
+        data['valuation'] = response  # Assuming the response updates the 'valuation' field
         return data
 
     async def add_to_update_task_queue(self, data):
