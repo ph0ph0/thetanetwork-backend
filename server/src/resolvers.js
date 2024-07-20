@@ -65,11 +65,6 @@ const resolvers = {
         );
         console.log(`Task sent to val_queue: ${JSON.stringify(task)}`);
 
-        // Publish the task to the subscription channel
-        pubsub.publish(`TASK_UPDATED_${task.folderPath}`, {
-          taskUpdated: task,
-        });
-
         return task;
       } catch (error) {
         console.error("Error in createTask:", error);
